@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بالحب والله</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#170a14;
+    --bg-mid:#2a0f24;
+    --pink-hot:#ff3d8f;
+    --pink-soft:#ffb6d9;
+    --pink-pale:#ffe3f0;
+    --gold:#ffd76a;
+    --purple-glow:#7a2a6b;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html,body{
+    height:100%;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,61,143,0.18), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(122,42,107,0.35), transparent 45%),
+      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    color:var(--pink-pale);
+    font-family:'Cairo', sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+
+  .stage{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:48px 20px 80px;
+    text-align:center;
+  }
+
+  /* ---- ستيكرز زخرفية ---- */
+  .sticker{
+    position:absolute;
+    font-size:28px;
+    opacity:0.8;
+    filter:drop-shadow(0 0 6px rgba(255,182,217,0.5));
+    animation:float 6s ease-in-out infinite;
+    pointer-events:none;
+    user-select:none;
+  }
+  .sticker.s1{top:6%; left:8%; font-size:34px; animation-delay:0s;}
+  .sticker.s2{top:14%; right:10%; font-size:24px; animation-delay:1.2s;}
+  .sticker.s3{top:38%; left:4%; font-size:20px; animation-delay:2.1s;}
+  .sticker.s4{top:60%; right:6%; font-size:30px; animation-delay:0.6s;}
+  .sticker.s5{bottom:12%; left:12%; font-size:26px; animation-delay:1.8s;}
+  .sticker.s6{bottom:20%; right:16%; font-size:22px; animation-delay:2.6s;}
+  .sticker.s7{top:50%; left:50%; font-size:18px; animation-delay:3s; opacity:0.5;}
+
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-14px) rotate(8deg);}
+  }
+
+  /* ---- العنوان ---- */
+  .brand{
+    font-family:'Lalezar', cursive;
+    font-size:clamp(38px, 8vw, 64px);
+    color:var(--pink-hot);
+    text-shadow:0 0 18px rgba(255,61,143,0.6), 0 0 40px rgba(255,61,143,0.25);
+    margin-top:20px;
+    letter-spacing:1px;
+  }
+
+  .subtitle{
+    margin-top:10px;
+    font-size:16px;
+    color:var(--pink-soft);
+    max-width:340px;
+    line-height:1.9;
+  }
+
+  /* ---- الزرار 3D ---- */
+  .lucky-button{
+    appearance:none;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    margin-top:56px;
+    font-family:'Cairo', sans-serif;
+    font-weight:900;
+    font-size:22px;
+    color:#3a0322;
+    padding:20px 52px;
+    border-radius:20px;
+    background:linear-gradient(180deg, #ffb6d9 0%, var(--pink-hot) 60%, #d81b6a 100%);
+    box-shadow:
+      0 8px 0 #a8155c,
+      0 14px 20px rgba(0,0,0,0.45),
+      inset 0 2px 4px rgba(255,255,255,0.5);
+    transform:translateY(0);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .lucky-button:hover{
+    box-shadow:
+      0 9px 0 #a8155c,
+      0 18px 24px rgba(0,0,0,0.5),
+      inset 0 2px 4px rgba(255,255,255,0.55);
+  }
+  .lucky-button:active{
+    transform:translateY(8px);
+    box-shadow:
+      0 0 0 #a8155c,
+      0 4px 10px rgba(0,0,0,0.4),
+      inset 0 2px 4px rgba(255,255,255,0.4);
+  }
+
+  .hint{
+    margin-top:16px;
+    font-size:13px;
+    color:rgba(255,227,240,0.55);
+  }
+
+  /* ---- قسم التقييم ---- */
+  .rating-card{
+    margin-top:64px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,182,217,0.25);
+    backdrop-filter:blur(6px);
+    border-radius:24px;
+    padding:28px 30px 32px;
+    width:100%;
+    max-width:340px;
+  }
+
+  .rating-title{
+    font-size:17px;
+    font-weight:700;
+    color:var(--pink-pale);
+    margin-bottom:6px;
+  }
+  .rating-sub{
+    font-size:13px;
+    color:rgba(255,227,240,0.6);
+    margin-bottom:18px;
+  }
+
+  .stars{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    direction:ltr;
+  }
+  .stars input{ display:none; }
+  .stars label{
+    font-size:34px;
+    cursor:pointer;
+    color:rgba(255,255,255,0.18);
+    transition:transform 0.15s ease, color 0.15s ease;
+  }
+  .stars label:hover,
+  .stars label:hover ~ label{
+    transform:scale(1.15);
+  }
+  .stars input:checked ~ label{ color: var(--gold); }
+  /* لأن التصميم LTR جوه القسم، عكسنا ترتيب العناصر بالـ HTML عشان hover يشتغل صح */
+
+  .rating-msg{
+    margin-top:14px;
+    font-size:14px;
+    min-height:20px;
+    color:var(--gold);
+    font-weight:700;
+  }
+
+  footer{
+    margin-top:50px;
+    font-size:12px;
+    color:rgba(255,227,240,0.35);
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- ستيكرز -->
+  <div class="sticker s1">💗</div>
+  <div class="sticker s2">✨</div>
+  <div class="sticker s3">🎀</div>
+  <div class="sticker s4">🌸</div>
+  <div class="sticker s5">⭐</div>
+  <div class="sticker s6">💫</div>
+  <div class="sticker s7">🦋</div>
+
+  <h1 class="brand">شوفي فيديو اليوم من حظك</h1>
+  <p class="subtitle">اضغطي على الزرار وخليكي مستعدة… حظك النهاردة في انتظارك 🌙💕</p>
+
+  <button class="lucky-button" id="luckyBtn">شوفـ/ـي حظك</button>
+  <p class="hint">اضغطي وهيتفتحلك على طول 🎀</p>
+
+  <div class="rating-card">
+    <div class="rating-title">عجبك حظك النهاردة؟</div>
+    <div class="rating-sub">قيّمي تجربتك بالنجوم</div>
+
+    <div class="stars">
+      <input type="radio" id="star5" name="rate" value="5"><label for="star5">★</label>
+      <input type="radio" id="star4" name="rate" value="4"><label for="star4">★</label>
+      <input type="radio" id="star3" name="rate" value="3"><label for="star3">★</label>
+      <input type="radio" id="star2" name="rate" value="2"><label for="star2">★</label>
+      <input type="radio" id="star1" name="rate" value="1"><label for="star1">★</label>
+    </div>
+
+    <div class="rating-msg" id="ratingMsg"></div>
+  </div>
+
+  <footer>اول تجربه ♥️</footer>
+</div>
+
+<script>
+  // 🔗 غيّري الرابط ده بالرابط اللي عايزاه يفتح لما تدوس على الزرار
+  const LUCKY_LINK = "https://example.com/your-link-here";
+
+  document.getElementById('luckyBtn').addEventListener('click', function(){
+    window.open(LUCKY_LINK, '_blank');
+  });
+
+  const messages = {
+    "5": "يااااي! أحلى تقييم 💗",
+    "4": "تمام كده! 🌸",
+    "3": "حلو، تسلمي 💫",
+    "2": "تحت أمرك هنحسنها 🎀",
+    "1": "شكرًا لصراحتك 💌"
+  };
+
+  document.querySelectorAll('.stars input').forEach(function(input){
+    input.addEventListener('change', function(){
+      document.getElementById('ratingMsg').textContent = messages[this.value] || "شكرًا لتقييمك 💕";
+    });
+  });
+</script>
+
+</body>
+  </html>
+
