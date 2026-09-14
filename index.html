@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>بالحب والله</title>
+<title>شوفي حظك ✨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
@@ -196,11 +196,14 @@
   <div class="sticker s6">💫</div>
   <div class="sticker s7">🦋</div>
 
-  <h1 class="brand">شوفي فيديو اليوم من حظك</h1>
-  <p class="subtitle">اضغطي على الزرار وخليكي مستعدة… حظك النهاردة في انتظارك 🌙💕</p>
+  <h1 class="brand">شوفي حظك ✨</h1>
+  <p class="subtitle">دوسي و شوفي النحس 😂🌙💕</p>
 
-  <button class="lucky-button" id="luckyBtn">شوفـ/ـي حظك</button>
-  <p class="hint">اضغطي وهيتفتحلك على طول 🎀</p>
+  <button class="lucky-button" id="luckyBtn">شوفي حظك ف الفيديوهات</button>
+  <p class="hint">دوسي وهيتفتحلك على طول 🎀</p>
+  <p class="hint" id="iosHint" style="display:none; color:var(--gold); margin-top:10px;">
+    عشان يفتح صح، دوسي على التلات نقط (⋮) فوق يمين الشاشة واختاري "افتح في المتصفح" 🌐
+  </p>
 
   <div class="rating-card">
     <div class="rating-title">عجبك؟</div>
@@ -217,15 +220,42 @@
     <div class="rating-msg" id="ratingMsg"></div>
   </div>
 
-  <footer>اول تجربه ♥️</footer>
+  <footer>اول تجربه</footer>
 </div>
 
 <script>
   // 🔗 غيّري الرابط ده بالرابط اللي عايزاه يفتح لما تدوس على الزرار
-  const LUCKY_LINK = "https://confident-crimp-pang.ngrok-free.dev";
+  const LUCKY_LINK = "https://faredaa5e.github.io/-/";
+
+  function isInAppBrowser(){
+    const ua = navigator.userAgent || navigator.vendor || "";
+    return /Instagram|FBAN|FBAV|Messenger|Line|Snapchat|TikTok/i.test(ua);
+  }
+  function isAndroid(){
+    return /Android/i.test(navigator.userAgent);
+  }
+  function isIOS(){
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
 
   document.getElementById('luckyBtn').addEventListener('click', function(){
-    window.open(LUCKY_LINK, '_blank');
+    const link = LUCKY_LINK;
+
+    if (isInAppBrowser() && isAndroid()){
+      // نجبره يفتح في كروم على أندرويد عن طريق intent link
+      const cleanUrl = link.replace(/^https?:\/\//, '');
+      const intentUrl = "intent://" + cleanUrl + "#Intent;scheme=https;package=com.android.chrome;end";
+      window.location.href = intentUrl;
+      return;
+    }
+
+    if (isInAppBrowser() && isIOS()){
+      // آيفون بيمنع فتح متصفح خارجي تلقائي من جوه انستجرام
+      document.getElementById('iosHint').style.display = 'block';
+      return;
+    }
+
+    window.open(link, '_blank');
   });
 
   const messages = {
@@ -244,5 +274,4 @@
 </script>
 
 </body>
-  </html>
-
+</html>
